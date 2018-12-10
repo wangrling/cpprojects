@@ -1,0 +1,10 @@
+/home/wangrl/github/cpprojects/build/CMakeFiles/rebuild_cache.dir
+/home/wangrl/github/cpprojects/build/CMakeFiles/edit_cache.dir
+/home/wangrl/github/cpprojects/build/src/opengl/CMakeFiles/rebuild_cache.dir
+/home/wangrl/github/cpprojects/build/src/opengl/CMakeFiles/windows.dir
+/home/wangrl/github/cpprojects/build/src/opengl/CMakeFiles/edit_cache.dir
+/home/wangrl/github/cpprojects/build/src/boost/CMakeFiles/rebuild_cache.dir
+/home/wangrl/github/cpprojects/build/src/boost/CMakeFiles/example.dir
+/home/wangrl/github/cpprojects/build/src/boost/CMakeFiles/edit_cache.dir
+/home/wangrl/github/cpprojects/build/src/flac/CMakeFiles/rebuild_cache.dir
+/home/wangrl/github/cpprojects/build/src/flac/CMakeFiles/edit_cache.dir

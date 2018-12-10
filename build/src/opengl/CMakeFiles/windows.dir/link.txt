@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/windows.dir/windows.cpp.o CMakeFiles/windows.dir/glad.c.o  -o windows -lglfw3 -ldl -lGL -lX11 -lpthread -lm 

@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/KHR/khrplatform.h
+stdint.h
+-
+inttypes.h
+-
+stdint.h
+-
+
+../include/glad/glad.h
+windows.h
+-
+KHR/khrplatform.h
+-
+
+/home/wangrl/github/cpprojects/src/opengl/windows.cpp
+glad/glad.h
+-
+GLFW/glfw3.h
+-
+stdio.h
+-
+stdlib.h
+-
+getopt.h
+/home/wangrl/github/cpprojects/src/opengl/getopt.h
+
