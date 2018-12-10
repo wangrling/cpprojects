@@ -314,6 +314,9 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# 编译文件夹
+build/
+
 # OpenCover UI analysis results
 OpenCover/
 
