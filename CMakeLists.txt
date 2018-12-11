@@ -22,3 +22,5 @@ include_directories ("${PROJECT_SOURCE_DIR}/include/flac/")
 add_subdirectory (src/opengl)
 add_subdirectory (src/boost)
 add_subdirectory (src/flac)
+
+add_subdirectory (filament)
