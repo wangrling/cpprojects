@@ -2,4 +2,4 @@
 #define CPPROJECTS_VERSION_MAJOR 1
 #define CPPROJECTS_VERSION_MINOR 0
 
-/* #undef DEBUG */
+#define DEBUG

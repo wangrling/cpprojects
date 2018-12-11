@@ -1,0 +1,5 @@
+#ifndef TNT_UTILS_COMPILER_H
+#define TNT_UTILS_COMPILER_H
+
+
+#endif // !TNT_UTILS_COMPILER_H
