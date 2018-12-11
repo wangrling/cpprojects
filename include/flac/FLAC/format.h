@@ -158,6 +158,113 @@ extern "C" {
  */
 extern FLAC_API const char *FLAC__VERSION_STRING;
 
+/**
+ * The vendor string inserted by the encoder into the VORBIS_COMMNET block.
+ * This is a NUL-terminated ASCII string; when inserted into the VORBIS_COMMENT
+ * the trailing null nis tripped.
+ */
+extern FLAC_API const char *FLAC__VENDOR_STRING;
+
+/** The byte string representation of the beginning of a FLAC stream. */
+/* = "fLaC" */
+extern FLAC_API const FLAC__byte FLACT__STREAM_SYNC_STRING[4];
+
+/**
+ * The 32-bit integer big-endian representation of the beginning of  a FLAC stream.
+ */
+// ascii f = 66
+extern FLAC_API const unsigned FLAC__STREAM_SYNC;   /* = 0x664C6143 */
+
+/** The length of the FLAC signature in bits */
+extern FLAC_API const unsigned FLAC__STREAM_SYNC_LEN;   /* = 32 bits */
+
+/** The length of the FLAC signature in bytes. */
+#define FLAC__STREAM_SYNC_LENGTH (4u)
+
+
+/********************************************************************
+ * 
+ * Subframe structures
+ * 
+ ********************************************************************/
+/** An emueration of the available entropy coding methods. */
+// FLAC currently defines two similar methods for the coding of the error signal
+// from the prediction stage.
+// RESIDUAL_CODING_METHOD_PARTITIONED_RICE
+// RESIDUAL_CODING_METHOD_PARTITIONED_RICE2
+typedef enum {
+    /** Residual is coded by partitioning into contexts, each with it's own
+     * 4-bit Rice parameter. */
+    FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE = 0,
+    
+    /** Residual is coded by partitioning into contexts, each with it's own
+     * 5-bit Rice parameter. */
+    FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE2 = 1
+} FLAC__EntropyCodingMethodType;
+
+/**
+ * Map a FLAC__EntropyCodingMethodType to a C string.
+ * 
+ * Using a FLAC__EntropyCodingMethodType as the index to this array will give
+ * the string equivalent. The contents should not be modified.
+ */
+// 使用字符串表示
+extern FLAC_API const char * const FLAC__EntropyCodingMethodTypeString[];
+
+/**
+ * Contents of a Rice partitioned residual (残余)
+ */
+// RICE_PARTITION
+// <4+(5)> Encoding paramter:
+        // 0000-1110:   Rice parameter.     使用parameters表示
+        // 1111: Escape code    使用raw_bits表示
+// <?> (需要的位数未确定) Encoded residual   // capacity_by_order表示指针的大小。    
+typedef struct {
+    
+    /** The Rice parameters for each context. */
+    unsigned *parameters;
+
+    /** Widths for escape-coded partitions. Will be non-zero for escaped
+     * partitions and zero for unescaped partitions.
+     */
+    unsigned *raw_bits;
+
+    /**
+     * The capacity of the parameters and raw_bits arrays 
+     * specified as an order, i.e. the number of array elements
+     * allocated is 2^capacity_by_order.
+     */
+    unsigned capacity_by_order;
+} FLAC__EntropyCodingMethod_PartitionedRiceContents;
+
+
+// RESIDUAL_CODING_METHOD_PARTITIONED_RICE
+// <4>                  Partition order
+// RICE_PARTITION+      There will be 2^order partitions
+// 或者
+// RESIDUAL_CODING_METHOD_PARTITIONED_RICE2
+/** Header for a Rice partitioned residual. */
+typedef struct {
+    /** The partition order, i.e. # of contexts = 2^order. */
+    unsigned order;
+
+    /** The context's Rice parameters and/or raw bits. */
+    const FLAC__EntropyCodingMethod_PartitionedRiceContents *content;
+} FLAC__EntropyCodingMethod_PartitionedRice;
+
+// RESIDUAL_CODING_METHOD_PARTITIONED_RICE || RESIDUAL_CODING_METHOD_PARTITIONED_RICE
+// <4> Partition order.
+extern FLAC_API const unsigned FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE_ORDER_LEN; /** == 4 (bits) */
+// RICE_PARTITION
+// <4+(5)>  前面的4
+extern FLAC_API const unsigned FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE_PARAMETER_LEN; /** == 4 (bits) */
+// RICE2_PARTITION
+// <5+(5)>  前面的5
+extern FLAC_API const unsigned FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE2_PARAMETER_LEN; /** == 5 (bits) */
+// 后面的5
+extern FLAC_API const unsigned FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE_RAW_LEN;    /** == 5 (bits) */
+
+
 #ifdef __cplusplus
 }
 #endif
